@@ -10,7 +10,7 @@ from sklearn.cluster import KMeans
 
 def anlise_1(db_conn):
 
-    query = "SELECT * FROM dbo.[Users-21-05-24]"
+    query = "SELECT top 10 * FROM dbo.[Users-21-05-24]"
 
     data_frame = pd.read_sql(query, db_conn)
 
