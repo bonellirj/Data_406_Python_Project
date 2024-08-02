@@ -7,13 +7,12 @@ from statsmodels.api import OLS
 from sklearn.metrics import mean_absolute_error, mean_squared_error, mean_absolute_percentage_error
 import seaborn as sns
 
-# Função para substituir valores abaixo do limiar pela média
+# Function to replace values ​​below the threshold with the mean
 def replace_below_threshold_with_mean(df, threshold=1000):
     mean_value = df['total_sessions'].mean()
     df['total_sessions'] = df['total_sessions'].apply(lambda x: mean_value if x < threshold else x)
     return df
 
-# Função para plotar previsões e mostrar estatísticas
 def plot_forecast(df, city_name):
     df['session_week'] = pd.to_datetime(df['session_week'])
     df.set_index('session_week', inplace=True)

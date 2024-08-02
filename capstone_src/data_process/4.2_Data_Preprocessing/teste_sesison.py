@@ -3,7 +3,7 @@ import pandas as pd
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 import matplotlib.pyplot as plt
 
-print('Iniciando...')
+print('Starting...')
 
 useCols = ['Device time', 'Session ID', 'City']
 files = ['../../../data_files/sessions_01.csv',
@@ -19,16 +19,16 @@ files = ['../../../data_files/sessions_01.csv',
          '../../../data_files/sessions_11.csv',
          '../../../data_files/sessions_12.csv']
 
-print('Arquivos carregando.')
+print('uploading files.')
 
 
 dfs = [pd.read_csv(file, usecols=useCols) for file in files]
 
-print('Arquivos carregados.')
+print('files uploaded.')
 
 df = pd.concat(dfs, ignore_index=True)
 
-print('Arquivos unificados.')
+print('unified files.')
 
 # df = df[['Device time', 'Session ID', 'City']]
 
@@ -39,7 +39,7 @@ df['City'] = df['City'].astype('category')
 df['Device time'] = pd.to_datetime(df['Device time'], errors='coerce')
 df = df.dropna(subset=['Device time'])
 
-print('Arquivos carregados.')
+print('files uploaded.')
 
 df = df[(df['Device time'].dt.year == 2024) & (df['Device time'] >= '2024-04-03')]
 
@@ -52,7 +52,7 @@ daily_sessions.set_index('day', inplace=True)
 
 print('MIN and MAX:', daily_sessions.index.min(), daily_sessions.index.max())
 
-print("dia,totalSessoes")
+print("day,totalSessions")
 for date, sessions in daily_sessions.iterrows():
     print(f"{date.date()},{sessions['sessions']}")
 

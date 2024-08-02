@@ -8,7 +8,7 @@ import seaborn as sns
 # Load the dataset
 df = pd.read_parquet('../../../data_files/output_directory/unified_sessions.parquet')
 
-# Converter 'Session duration' para segundos
+# Converting 'Session duration' to seconds
 def convert_session_duration(duration):
     try:
         if isinstance(duration, str):
@@ -37,9 +37,7 @@ print(summary_stats)
 # Save summary statistics to a CSV file for reference
 summary_stats.to_csv('../../../data_files/output_directory/summary_statistics.csv', index=True)
 
-# Visualization of some key statistics
 
-# Example: Distribution of Session Duration
 plt.figure(figsize=(10, 6))
 sns.histplot(df['Session duration'].dropna(), bins=30, kde=True)
 plt.title('Distribution of Session Duration')
@@ -48,7 +46,6 @@ plt.ylabel('Frequency')
 plt.savefig('../../../data_files/output_directory/session_duration_distribution.png')
 plt.show()
 
-# Example: Boxplot of Session Duration by Platform
 plt.figure(figsize=(10, 6))
 sns.boxplot(x='Platform', y='Session duration', data=df)
 plt.title('Session Duration by Platform')
@@ -57,7 +54,6 @@ plt.ylabel('Session Duration (seconds)')
 plt.savefig('../../../data_files/output_directory/session_duration_by_platform.png')
 plt.show()
 
-# Example: Countplot of Events
 plt.figure(figsize=(10, 6))
 sns.countplot(x='Events', data=df, order=df['Events'].value_counts().iloc[:10].index)
 plt.title('Top 10 Most Frequent Events')
@@ -67,12 +63,10 @@ plt.xticks(rotation=45)
 plt.savefig('../../../data_files/output_directory/top_10_events.png')
 plt.show()
 
-# Example: Summary of missing values
 missing_values = df.isnull().sum()
 missing_values = missing_values[missing_values > 0]
 print(missing_values)
 
-# Save missing values summary to a CSV file
 missing_values.to_csv('../../../data_files/output_directory/missing_values_summary.csv', index=True)
 
 print("Data exploration and descriptive statistics analysis completed.")
@@ -136,12 +130,9 @@ def descriptive_statistics(df):
 summary_stats = descriptive_statistics(df_filtered)
 print(summary_stats)
 
-# Save summary statistics to a CSV file for reference
 summary_stats.to_csv('../../../data_files/output_directory/summary_statistics_filtered.csv', index=True)
 
-# Visualization of some key statistics
 
-# Example: Distribution of Session Duration
 plt.figure(figsize=(10, 6))
 sns.histplot(df_filtered['Session duration'].dropna(), bins=30, kde=True)
 plt.title('Distribution of Session Duration')
@@ -150,7 +141,6 @@ plt.ylabel('Frequency')
 plt.savefig('../../../data_files/output_directory/session_duration_distribution_filtered.png')
 plt.show()
 
-# Example: Boxplot of Session Duration by Platform
 plt.figure(figsize=(10, 6))
 sns.boxplot(x='Platform', y='Session duration', data=df_filtered)
 plt.title('Session Duration by Platform')
@@ -159,7 +149,6 @@ plt.ylabel('Session Duration (seconds)')
 plt.savefig('../../../data_files/output_directory/session_duration_by_platform_filtered.png')
 plt.show()
 
-# Example: Countplot of Events
 plt.figure(figsize=(10, 6))
 sns.countplot(x='Events', data=df_filtered, order=df_filtered['Events'].value_counts().iloc[:10].index)
 plt.title('Top 10 Most Frequent Events')
@@ -169,12 +158,10 @@ plt.xticks(rotation=45)
 plt.savefig('../../../data_files/output_directory/top_10_events_filtered.png')
 plt.show()
 
-# Distribution of Sessions by City
 city_counts = df_filtered['City'].value_counts()
 top_5_cities = city_counts.head(5)
 other_cities = city_counts.iloc[5:].sum()
 
-# Plot proportion of top 5 cities vs others
 plt.figure(figsize=(10, 6))
 labels = list(top_5_cities.index) + ['Others']
 sizes = list(top_5_cities.values) + [other_cities]
@@ -183,7 +170,6 @@ plt.title('Proportion of Top 5 Cities vs Others')
 plt.savefig('../../../data_files/output_directory/city_proportion_pie.png')
 plt.show()
 
-# Plot distribution among the top 5 cities
 plt.figure(figsize=(10, 6))
 sns.barplot(x=top_5_cities.index, y=top_5_cities.values)
 plt.title('Distribution of Sessions Among Top 5 Cities')
@@ -192,12 +178,10 @@ plt.ylabel('Number of Sessions')
 plt.savefig('../../../data_files/output_directory/top_5_cities_bar.png')
 plt.show()
 
-# Example: Summary of missing values
 missing_values = df_filtered.isnull().sum()
 missing_values = missing_values[missing_values > 0]
 print(missing_values)
 
-# Save missing values summary to a CSV file
 missing_values.to_csv('../../../data_files/output_directory/missing_values_summary_filtered.csv', index=True)
 
 print("Data exploration and descriptive statistics analysis completed.")

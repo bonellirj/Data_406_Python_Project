@@ -24,13 +24,13 @@ def process_file(file_path, output_dir):
     
     df.to_csv(output_path, sep=';', index=False)
 
-# Diretório de saída
+
 output_dir = '../../../data_files/output_directory'
 os.makedirs(output_dir, exist_ok=True)
 
-# Processar todos os arquivos
+
 for file in files:
     process_file(file, output_dir)
 
-print("Todos os arquivos foram processados e salvos com delimitador ponto-e-vírgula.")
+print("All files were processed and saved with semicolon delimiter.")
 # %%

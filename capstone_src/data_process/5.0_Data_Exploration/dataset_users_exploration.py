@@ -10,18 +10,14 @@ import plotly.graph_objects as go
 original_file = '../../../data_files/users_original.csv'
 df_original = pd.read_csv(original_file)
 
-# Visualize the first few rows of the dataframe
 print(df_original.head())
 
-# Descriptive statistics
 print(df_original.describe())
 
-# Histograms for numeric columns
 df_original.hist(bins=30, figsize=(15, 10))
 plt.suptitle('Histogram of Numeric Columns')
 plt.show()
 
-# Correlation matrix
 corr = df_original.corr()
 plt.figure(figsize=(12, 8))
 sns.heatmap(corr, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
@@ -29,7 +25,6 @@ plt.title('Correlation Matrix')
 plt.show()
 
 
-# Count plot for categorical columns
 categorical_columns = ['CityId', 'DeviceId', 'PlatformId', 'Device classId', 'OS versionId', 'App versionId']
 
 plt.figure(figsize=(15, 10))
